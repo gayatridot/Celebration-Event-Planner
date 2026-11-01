@@ -85,7 +85,7 @@ export const TimelinePlanner = ({ isOpen, onClose, event, onToast }) => {
       console.warn('Failed to parse saved timeline:', e);
     }
 
-    const template = DEFAULT_TIMELINE_TEMPLATES[event.category] || DEFAULT_TIMELINE_TEMPLATES.Community;
+    const template = (event?.category && DEFAULT_TIMELINE_TEMPLATES[event.category]) || DEFAULT_TIMELINE_TEMPLATES.Community;
     return template.map((item, index) => {
       const targetDate = new Date(eventDateObj);
       targetDate.setDate(targetDate.getDate() + item.offsetDays);
@@ -119,7 +119,7 @@ export const TimelinePlanner = ({ isOpen, onClose, event, onToast }) => {
   const [newTask, setNewTask] = useState({
     title: '',
     category: 'General',
-    dueDate: event.date || new Date().toISOString().split('T')[0],
+    dueDate: event?.date || new Date().toISOString().split('T')[0],
     priority: 'Medium',
     notes: ''
   });
@@ -201,7 +201,7 @@ export const TimelinePlanner = ({ isOpen, onClose, event, onToast }) => {
     setNewTask({
       title: '',
       category: 'General',
-      dueDate: event.date || new Date().toISOString().split('T')[0],
+      dueDate: event?.date || new Date().toISOString().split('T')[0],
       priority: 'Medium',
       notes: ''
     });

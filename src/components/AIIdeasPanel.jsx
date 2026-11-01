@@ -245,8 +245,10 @@ Return strictly valid JSON with this exact schema (no markdown, just JSON):
 
   // Trigger load on category change
   useEffect(() => {
-    generateIdeasForCategory(activeCategoryId);
-  }, [activeCategoryId, event.id]);
+    if (event?.id) {
+      generateIdeasForCategory(activeCategoryId);
+    }
+  }, [activeCategoryId, event?.id]);
 
   // Toggle Pin Idea
   const handleTogglePin = (idea) => {

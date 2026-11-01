@@ -86,7 +86,7 @@ export const BudgetManager = ({ isOpen, onClose, event, onToast }) => {
           name: 'Advance Venue Booking Deposit',
           amount: 45000,
           category: categoryList[0] || 'Venue',
-          date: event.date || new Date().toISOString().split('T')[0],
+          date: event?.date || new Date().toISOString().split('T')[0],
           isPaid: true,
           notes: '50% advance cleared via UPI'
         },
@@ -95,7 +95,7 @@ export const BudgetManager = ({ isOpen, onClose, event, onToast }) => {
           name: 'Welcome Drinks & Catering Tasting',
           amount: 15000,
           category: categoryList[1] || 'Catering',
-          date: event.date || new Date().toISOString().split('T')[0],
+          date: event?.date || new Date().toISOString().split('T')[0],
           isPaid: false,
           notes: 'Balance due upon menu sign-off'
         }

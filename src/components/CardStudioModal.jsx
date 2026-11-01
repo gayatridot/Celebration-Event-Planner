@@ -215,7 +215,7 @@ export const CardStudioModal = ({
 
       const image = canvas.toDataURL('image/png', 1.0);
       const link = document.createElement('a');
-      const filename = `${event.name.replace(/[^a-zA-Z0-9]/g, '_')}_Invitation_Card.png`;
+      const filename = `${(event?.name || 'Event').replace(/[^a-zA-Z0-9]/g, '_')}_Invitation_Card.png`;
       link.href = image;
       link.download = filename;
       document.body.appendChild(link);
@@ -255,6 +255,7 @@ export const CardStudioModal = ({
 
   // Formatted event date
   const formattedDate = (() => {
+    if (!event?.date) return '';
     try {
       const d = new Date(event.date);
       return d.toLocaleDateString('en-US', {
@@ -264,13 +265,13 @@ export const CardStudioModal = ({
         year: 'numeric'
       });
     } catch {
-      return event.date;
+      return event?.date || '';
     }
   })();
 
   // Cultural / Occasion invocation header
   const getCulturalHeader = () => {
-    switch (event.category) {
+    switch (event?.category) {
       case 'Marriage':
         return selectedLang === 'hi' || selectedLang === 'mr' || selectedLang === 'gu'
           ? '|| श्री गणेशाय नमः ||'

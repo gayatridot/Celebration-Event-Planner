@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { Navbar } from './components/Navbar';
 import { EventDashboard } from './components/EventDashboard';
 import { EventModal } from './components/EventModal';
@@ -164,64 +165,82 @@ export function App() {
         />
       </main>
 
-      {/* Modals & Dialogs */}
-      <EventModal
-        isOpen={isEventModalOpen}
-        onClose={() => setIsEventModalOpen(false)}
-        onSave={handleSaveEvent}
-        eventToEdit={eventToEdit}
-      />
+      {/* Modals & Dialogs with Error Boundary */}
+      <ErrorBoundary>
+        {isEventModalOpen && (
+          <EventModal
+            isOpen={isEventModalOpen}
+            onClose={() => setIsEventModalOpen(false)}
+            onSave={handleSaveEvent}
+            eventToEdit={eventToEdit}
+          />
+        )}
 
-      <CardStudioModal
-        isOpen={isCardStudioOpen}
-        onClose={() => setIsCardStudioOpen(false)}
-        event={studioEvent}
-        onToast={showToast}
-      />
+        {isCardStudioOpen && studioEvent && (
+          <CardStudioModal
+            isOpen={isCardStudioOpen}
+            onClose={() => setIsCardStudioOpen(false)}
+            event={studioEvent}
+            onToast={showToast}
+          />
+        )}
 
-      <BudgetManager
-        isOpen={isBudgetOpen}
-        onClose={() => setIsBudgetOpen(false)}
-        event={budgetEvent}
-        onToast={showToast}
-      />
+        {isBudgetOpen && budgetEvent && (
+          <BudgetManager
+            isOpen={isBudgetOpen}
+            onClose={() => setIsBudgetOpen(false)}
+            event={budgetEvent}
+            onToast={showToast}
+          />
+        )}
 
-      <TimelinePlanner
-        isOpen={isTimelineOpen}
-        onClose={() => setIsTimelineOpen(false)}
-        event={timelineEvent}
-        onToast={showToast}
-      />
+        {isTimelineOpen && timelineEvent && (
+          <TimelinePlanner
+            isOpen={isTimelineOpen}
+            onClose={() => setIsTimelineOpen(false)}
+            event={timelineEvent}
+            onToast={showToast}
+          />
+        )}
 
-      <VendorChecklist
-        isOpen={isVendorsOpen}
-        onClose={() => setIsVendorsOpen(false)}
-        event={vendorEvent}
-        onToast={showToast}
-      />
+        {isVendorsOpen && vendorEvent && (
+          <VendorChecklist
+            isOpen={isVendorsOpen}
+            onClose={() => setIsVendorsOpen(false)}
+            event={vendorEvent}
+            onToast={showToast}
+          />
+        )}
 
-      <AIIdeasPanel
-        isOpen={isIdeasOpen}
-        onClose={() => setIsIdeasOpen(false)}
-        event={ideasEvent}
-        onToast={showToast}
-      />
+        {isIdeasOpen && ideasEvent && (
+          <AIIdeasPanel
+            isOpen={isIdeasOpen}
+            onClose={() => setIsIdeasOpen(false)}
+            event={ideasEvent}
+            onToast={showToast}
+          />
+        )}
 
-      <AiAssistantModal
-        isOpen={isAssistantOpen}
-        onClose={() => setIsAssistantOpen(false)}
-        event={assistantEvent}
-        onToast={showToast}
-      />
+        {isAssistantOpen && assistantEvent && (
+          <AiAssistantModal
+            isOpen={isAssistantOpen}
+            onClose={() => setIsAssistantOpen(false)}
+            event={assistantEvent}
+            onToast={showToast}
+          />
+        )}
 
-      <ApiKeyModal
-        isOpen={isApiModalOpen}
-        onClose={() => setIsApiModalOpen(false)}
-        onKeySaved={(key) => {
-          setHasApiKey(Boolean(key));
-          showToast(key ? 'Gemini API Key activated!' : 'Using Smart Cultural Engine (Fallback Mode)', 'info');
-        }}
-      />
+        {isApiModalOpen && (
+          <ApiKeyModal
+            isOpen={isApiModalOpen}
+            onClose={() => setIsApiModalOpen(false)}
+            onKeySaved={(key) => {
+              setHasApiKey(Boolean(key));
+              showToast(key ? 'Gemini API Key activated!' : 'Using Smart Cultural Engine (Fallback Mode)', 'info');
+            }}
+          />
+        )}
+      </ErrorBoundary>
 
       {/* Toast Notification */}
       <Toast
