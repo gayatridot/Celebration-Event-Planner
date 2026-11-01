@@ -1,4 +1,4 @@
-# 🎊 UtsavAI — GenAI-Powered Celebration & Event Planning Assistant
+# 🎊 GenAI-Powered Celebration & Event Planning Assistant
 
 [![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
